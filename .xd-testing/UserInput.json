@@ -4,6 +4,11 @@
       "name": "VisualSenseTimeInterval",
       "ontologyName": "VisualSense",
       "fileName": "VisualSense/VisualSenseTimeInterval/visualsense.owl"
+    },
+    {
+      "name": "fragment1",
+      "ontologyName": "VisualSense",
+      "fileName": "VisualSense/fragment1/MusicalComposition.owl"
     }
   ],
   "ontologies": [
