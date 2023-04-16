@@ -1,0 +1,2 @@
+ INFO 2023-04-16 19:45:48,307 [main] (OWLUnit.java:89) - Test case URI https://raw.githubusercontent.com/vpresutti/KnowledgeEngineering2023/main/XDTesting/RacingCars/RacingCars01/CompetencyQuestionVerificationTest/CQTestCase/CQ001.ttl
+ INFO 2023-04-16 19:45:51,447 [main] (OWLUnit.java:89) - Test case URI https://raw.githubusercontent.com/vpresutti/KnowledgeEngineering2023/main/XDTesting/RacingCars/RacingCars01/CompetencyQuestionVerificationTest/CQTestCase/CQ001.ttl
