@@ -1,0 +1,45 @@
+name: Python Script
+on:
+  #workflow_dispatch:
+  push:
+    branches:
+      - main
+      #- '.xd-testing/UserInput.json'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: XDTesting Environment Setup
+        uses: FiorelaCiroku/XDTesting-SetupEnvironment@v1.0.0
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install python requirements
+        shell: bash
+        run: |
+          pip install rdflib
+          pip install requests
+          pip install pytablewriter
+
+      - name: Create Test Case and Data Set
+        shell: bash
+        run: python script.py ${{ github.repository }} "create" "TokenNotRequired"
+
+      - name: Git Add & Commit
+        uses: EndBug/add-and-commit@v9.0.1
+        with:
+          default_author: github_actions
+
+      - name: Run Execute Test
+        shell: bash
+        run: python script.py ${{ github.repository }} "test" "${{ secrets.TOKEN }}"
+      
+      - name: Git Add & Commit
+        uses: EndBug/add-and-commit@v9.0.1
+        with:
+          default_author: github_actions
+          remove: './OWLUnit-0.3.2.jar'
