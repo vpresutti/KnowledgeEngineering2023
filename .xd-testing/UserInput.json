@@ -1,0 +1,9 @@
+{
+  "ontologies": [
+    {
+      "url": "www.dofof.com",
+      "name": "myOntology",
+      "userDefined": true
+    }
+  ]
+}
