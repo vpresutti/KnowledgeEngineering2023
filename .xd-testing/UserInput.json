@@ -7,7 +7,7 @@
       "tests": [
         {
           "type": "COMPETENCY_QUESTION",
-          "content": "gyh?",
+          "content": "gyhui?",
           "reasoner": "hermiT 1.4.3.456",
           "status": "running",
           "query": "select fjf",
