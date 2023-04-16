@@ -4,19 +4,9 @@
       "name": "VisualSenseTimeInterval",
       "ontologyName": "VisualSense",
       "fileName": "VisualSense/VisualSenseTimeInterval/visualsense.owl"
-    },
-    {
-      "name": "fragment1",
-      "ontologyName": "VisualSense",
-      "fileName": "VisualSense/fragment1/MusicalComposition.owl"
     }
   ],
   "ontologies": [
-    {
-      "url": "https://raw.githubusercontent.com/vpresutti/KnowledgeEngineering2023/main/.xd-testing/VisualSense/visualsense.owl",
-      "name": "VisualSense",
-      "userDefined": true
-    },
     {
       "url": "https://raw.githubusercontent.com/vpresutti/KnowledgeEngineering2023/main/.xd-testing/RacingCars/RacingCars.owl",
       "name": "RacingCars",
