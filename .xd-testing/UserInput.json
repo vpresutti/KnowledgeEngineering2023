@@ -3,7 +3,21 @@
     {
       "name": "RacingCars01",
       "ontologyName": "RacingCars",
-      "fileName": "RacingCars/RacingCars01/ferrari.owl"
+      "fileName": "RacingCars/RacingCars01/ferrari.owl",
+      "tests": [
+        {
+          "type": "COMPETENCY_QUESTION",
+          "content": "gyh?",
+          "reasoner": "hermiT 1.4.3.456",
+          "status": "running",
+          "query": "select fjf",
+          "data": "",
+          "dataFileName": "RacingCars/RacingCars01/datasets/ferrari.owl",
+          "expectedResults": "",
+          "expectedResultsFileName": "RacingCars/RacingCars01/expectedResults/CQ1.ttl",
+          "id": "CQ001"
+        }
+      ]
     }
   ],
   "ontologies": [
