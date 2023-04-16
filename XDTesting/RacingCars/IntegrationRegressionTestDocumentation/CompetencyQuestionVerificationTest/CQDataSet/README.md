@@ -1,0 +1,1 @@
+This directory stores the sample dataset for the Competency Question Verification test cases.
