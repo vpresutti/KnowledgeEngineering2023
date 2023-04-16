@@ -1,1 +1,0 @@
-This directory stores Competency Question Verification test cases.

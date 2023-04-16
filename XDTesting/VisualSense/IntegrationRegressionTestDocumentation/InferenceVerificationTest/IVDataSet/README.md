@@ -1,1 +1,0 @@
-This directory stores the sample dataset for the Inference Verification test cases.
