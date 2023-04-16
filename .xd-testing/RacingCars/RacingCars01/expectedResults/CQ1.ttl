@@ -1,0 +1,7 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix visualsense: <https://w3id.org/visualsense/ontology/> .
+
+<http://w3id.org/visualsense/resource/ImageObject/image_object_2384656> a visualsense:ImageObject .
+
+<https://w3id.org/visualsense/resource/DepictedObject/depicted_object_691251> a visualsense:DepictedObject .
+<https://w3id.org/visualsense/resource/DepictedObject/depicted_object_691251> visualsense:isDepictedIn <http://w3id.org/visualsense/resource/ImageObject/image_object_2384656> .
