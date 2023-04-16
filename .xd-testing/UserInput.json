@@ -1,5 +1,11 @@
 {
-  "fragments": [],
+  "fragments": [
+    {
+      "name": "RacingCars01",
+      "ontologyName": "RacingCars",
+      "fileName": "RacingCars/RacingCars01/ferrari.owl"
+    }
+  ],
   "ontologies": [
     {
       "url": "https://raw.githubusercontent.com/vpresutti/KnowledgeEngineering2023/main/.xd-testing/RacingCars/RacingCars.owl",
