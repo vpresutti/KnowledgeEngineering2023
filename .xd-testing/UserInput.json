@@ -1,10 +1,6 @@
 {
+  "fragments": [],
   "ontologies": [
-    {
-      "url": "www.dofof.com",
-      "name": "myOntology",
-      "userDefined": true
-    },
     {
       "url": "https://raw.githubusercontent.com/vpresutti/KnowledgeEngineering2023/main/.xd-testing/VisualSense/visualsense.owl",
       "name": "VisualSense",
