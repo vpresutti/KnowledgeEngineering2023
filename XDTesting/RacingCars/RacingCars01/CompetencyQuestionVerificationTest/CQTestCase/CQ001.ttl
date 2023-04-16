@@ -1,0 +1,12 @@
+@prefix owlunit: <https://w3id.org/OWLunit/ontology/> .
+@prefix ns: <https://raw.githubusercontent.com/vpresutti/KnowledgeEngineering2023/main/.xd-testing/RacingCars/RacingCars01/ferrari.owl> .
+@prefix td: <https://raw.githubusercontent.com/vpresutti/KnowledgeEngineering2023/main/XDTesting/RacingCars/RacingCars01/CompetencyQuestionVerificationTest/CQDataSet/> .
+@prefix tc: <https://raw.githubusercontent.com/vpresutti/KnowledgeEngineering2023/main/XDTesting/RacingCars/RacingCars01/CompetencyQuestionVerificationTest/CQTestCase/> .
+
+tc:CQ001.ttl a owlunit:CompetencyQuestionVerification ;
+	owlunit:hasCompetencyQuestion "gyhui?" ;
+	owlunit:hasSPARQLUnitTest "select fjf" ;
+	owlunit:hasInputData td:CQ001TD.ttl ;
+	owlunit:hasInputTestDataCategory owlunit:ToyDataset ;
+	owlunit:hasExpectedResult "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .@prefix visualsense: <https://w3id.org/visualsense/ontology/> .<http://w3id.org/visualsense/resource/ImageObject/image_object_2384656> a visualsense:ImageObject .<https://w3id.org/visualsense/resource/DepictedObject/depicted_object_691251> a visualsense:DepictedObject .<https://w3id.org/visualsense/resource/DepictedObject/depicted_object_691251> visualsense:isDepictedIn <http://w3id.org/visualsense/resource/ImageObject/image_object_2384656> ."; 
+	owlunit:testsOntology ns: .
