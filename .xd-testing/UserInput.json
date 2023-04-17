@@ -11,6 +11,11 @@
       "name": "6_examplaries_Daniele_Ali",
       "ontologyName": "RacingCars",
       "fileName": "RacingCars/6_examplaries_Daniele_Ali/6examplaries.OWL"
+    },
+    {
+      "name": "new_test",
+      "ontologyName": "RacingCars",
+      "fileName": "RacingCars/new_test/new_test.rdf"
     }
   ]
 }
