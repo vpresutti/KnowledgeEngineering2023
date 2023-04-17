@@ -1,7 +1,7 @@
 {
     "fragments": [
         {
-            "name": "RacingCars01",
+            "name": "RacingCars012",
             "ontologyName": "RacingCars",
             "fileName": "RacingCars/RacingCars01/ferrari.owl"
         }
