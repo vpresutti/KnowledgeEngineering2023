@@ -705,185 +705,186 @@ def executeTestCase(fileData, fileName, repoName, token):
         repoName)
 
     for indexFragment in range(len(fileData['fragments'])):
-        for indexTest in range(len(fileData['fragments'][indexFragment]['tests'])):
-            # if getStatusValue(fileData, indexFragment, indexTest) != "warning":
-            if (getCheckValue(fileData, indexFragment, indexTest) is None or getCheckValue(fileData, indexFragment,
+        if 'tests' in fileData['fragments'][indexFragment]:
+            for indexTest in range(len(fileData['fragments'][indexFragment]['tests'])):
+                # if getStatusValue(fileData, indexFragment, indexTest) != "warning":
+                if (getCheckValue(fileData, indexFragment, indexTest) is None or getCheckValue(fileData, indexFragment,
                                                                                            indexTest) == 0):
-                testData = fileData['fragments'][indexFragment]['tests'][indexTest]
-                if (getTestType(testData) == 'COMPETENCY_QUESTION'):
-                    try:
-                        testFileLink = "https://raw.githubusercontent.com/" + repoName + "/main/XDTesting/" + \
+                    testData = fileData['fragments'][indexFragment]['tests'][indexTest]
+                    if (getTestType(testData) == 'COMPETENCY_QUESTION'):
+                        try:
+                            testFileLink = "https://raw.githubusercontent.com/" + repoName + "/main/XDTesting/" + \
                                        fileData['fragments'][indexFragment]['ontologyName'].replace(
                                            " ", "") + "/" + fileData['fragments'][indexFragment]['name'].replace(" ",
                                                                                                                  "") + "/CompetencyQuestionVerificationTest/"
 
-                        testFilePath = "./XDTesting/" + fileData['fragments'][indexFragment]['ontologyName'].replace(
-                            " ", "") + "/" + fileData['fragments'][indexFragment]['name'].replace(" ",
+                            testFilePath = "./XDTesting/" + fileData['fragments'][indexFragment]['ontologyName'].replace(
+                                " ", "") + "/" + fileData['fragments'][indexFragment]['name'].replace(" ",
                                                                                                   "") + "/TestDocumentation/"
 
-                        print('---- Executing Test ----')
+                            print('---- Executing Test ----')
 
-                        os.system(
-                            "java -jar OWLUnit-0.3.2.jar --test-case " + testFileLink + "CQTestCase/" + getID(
-                                testData) + ".ttl")
-                        testOutcome = subprocess.check_output(
-                            "java -jar OWLUnit-0.3.2.jar --test-case " + testFileLink + "CQTestCase/" + getID(
+                            os.system(
+                                "java -jar OWLUnit-0.3.2.jar --test-case " + testFileLink + "CQTestCase/" + getID(
+                                    testData) + ".ttl")
+                            testOutcome = subprocess.check_output(
+                                "java -jar OWLUnit-0.3.2.jar --test-case " + testFileLink + "CQTestCase/" + getID(
                                 testData) + ".ttl", shell=True)
 
-                        if "PASSED" in testOutcome.decode("utf-8"):
-                            print('---- PASSED ----')
-                            createTestDocumentation(
-                                testFilePath, "PASSED", testData, "CQDataSet/")
-                            setCheckValue(fileName, 1,
+                            if "PASSED" in testOutcome.decode("utf-8"):
+                                print('---- PASSED ----')
+                                createTestDocumentation(
+                                    testFilePath, "PASSED", testData, "CQDataSet/")
+                                setCheckValue(fileName, 1,
                                           indexFragment, indexTest)
-                            setStatusValue(fileName, 'success',
+                                setStatusValue(fileName, 'success',
                                            indexFragment, indexTest)
-                            setStatusNotesValue(fileName, "Executed",
+                                setStatusNotesValue(fileName, "Executed",
                                                 indexFragment, indexTest)
 
-                        elif "FAILED" in testOutcome.decode("utf-8"):
-                            print('---- FAILED----')
-                            createTestDocumentation(
-                                testFilePath, "FAILED", testData,
-                                "CQDataSet/")  # testFilePath, "FAILED", testData, "CQDataSet/", error)
-                            setStatusValue(fileName, 'failed',
+                            elif "FAILED" in testOutcome.decode("utf-8"):
+                                print('---- FAILED----')
+                                createTestDocumentation(
+                                    testFilePath, "FAILED", testData,
+                                    "CQDataSet/")  # testFilePath, "FAILED", testData, "CQDataSet/", error)
+                                setStatusValue(fileName, 'failed',
                                            indexFragment, indexTest)
-                            setStatusNotesValue(fileName, "Executed",
+                                setStatusNotesValue(fileName, "Executed",
                                                 indexFragment, indexTest)
 
-                    except Exception as error:
-                        print('---- ERROR----')
-                        data = {"title": getID(fileData), "body": error}
-                        try:
-                            createTestDocumentation(
-                                testFilePath, "FAILED", testData, "CQDataSet/", error)
-                            response = issue.post(url, data, headers=headers)
-                            print(response)
-                            setStatusValue(fileName, 'failed',
-                                           indexFragment, indexTest)
-                            setCheckValue(
-                                fileName, 0, indexFragment, indexTest)
-                            setStatusNotesValue(fileName, response,
-                                                indexFragment, indexTest)
                         except Exception as error:
-                            print("Error : " + error)
+                            print('---- ERROR----')
+                            data = {"title": getID(fileData), "body": error}
+                            try:
+                                createTestDocumentation(
+                                    testFilePath, "FAILED", testData, "CQDataSet/", error)
+                                response = issue.post(url, data, headers=headers)
+                                print(response)
+                                setStatusValue(fileName, 'failed',
+                                           indexFragment, indexTest)
+                                setCheckValue(
+                                    fileName, 0, indexFragment, indexTest)
+                                setStatusNotesValue(fileName, response,
+                                                indexFragment, indexTest)
+                            except Exception as error:
+                                print("Error : " + error)
 
-                elif (getTestType(testData) == 'INFERENCE_VERIFICATION'):
-                    try:
-                        testFileLink = "https://raw.githubusercontent.com/" + repoName + "/main/XDTesting/" + \
+                    elif (getTestType(testData) == 'INFERENCE_VERIFICATION'):
+                        try:
+                            testFileLink = "https://raw.githubusercontent.com/" + repoName + "/main/XDTesting/" + \
                                        fileData['fragments'][indexFragment]['ontologyName'].replace(
                                            " ", "") + "/" + fileData['fragments'][indexFragment]['name'].replace(" ",
                                                                                                                  "") + "/InferenceVerificationTest/"
 
-                        testFilePath = "./XDTesting/" + fileData['fragments'][indexFragment]['ontologyName'].replace(
-                            " ", "") + "/" + fileData['fragments'][indexFragment]['name'].replace(" ",
+                            testFilePath = "./XDTesting/" + fileData['fragments'][indexFragment]['ontologyName'].replace(
+                                " ", "") + "/" + fileData['fragments'][indexFragment]['name'].replace(" ",
                                                                                                   "") + "/TestDocumentation/"
-                        print('---- Executing Test ----')
-                        os.system(
-                            "java -jar OWLUnit-0.3.2.jar --test-case " + testFileLink + "IVTestCase/" + getID(
-                                testData) + ".ttl")
-                        testOutcome = subprocess.check_output(
-                            "java -jar OWLUnit-0.3.2.jar --test-case " + testFileLink + "IVTestCase/" + getID(
-                                testData) + ".ttl", shell=True)
+                            print('---- Executing Test ----')
+                            os.system(
+                                "java -jar OWLUnit-0.3.2.jar --test-case " + testFileLink + "IVTestCase/" + getID(
+                                    testData) + ".ttl")
+                            testOutcome = subprocess.check_output(
+                                "java -jar OWLUnit-0.3.2.jar --test-case " + testFileLink + "IVTestCase/" + getID(
+                                    testData) + ".ttl", shell=True)
 
-                        if "PASSED" in testOutcome.decode("utf-8"):
-                            print('---- PASSED ----')
-                            createTestDocumentation(
-                                testFilePath, "PASSED", testData, "IVDataSet/")
-                            setCheckValue(fileName, 1,
+                            if "PASSED" in testOutcome.decode("utf-8"):
+                                print('---- PASSED ----')
+                                createTestDocumentation(
+                                    testFilePath, "PASSED", testData, "IVDataSet/")
+                                setCheckValue(fileName, 1,
                                           indexFragment, indexTest)
-                            setStatusValue(fileName, 'success',
+                                setStatusValue(fileName, 'success',
                                            indexFragment, indexTest)
-                            setStatusNotesValue(fileName, "Executed",
+                                setStatusNotesValue(fileName, "Executed",
                                                 indexFragment, indexTest)
 
-                        elif "FAILED" in testOutcome.decode("utf-8"):
-                            print('---- FAILED----')
-                            createTestDocumentation(
-                                testFilePath, "FAILED", testData, "IVDataSet/")
-                            setStatusValue(fileName, 'failed',
+                            elif "FAILED" in testOutcome.decode("utf-8"):
+                                print('---- FAILED----')
+                                createTestDocumentation(
+                                    testFilePath, "FAILED", testData, "IVDataSet/")
+                                setStatusValue(fileName, 'failed',
                                            indexFragment, indexTest)
-                            setStatusNotesValue(fileName, "Executed",
-                                                indexFragment, indexTest)
-
-                    except Exception as error:
-                        print('---- ERROR----')
-                        data = {"title": getID(fileData), "body": error}
-                        try:
-                            createTestDocumentation(
-                                testFilePath, "FAILED", testData, "IVDataSet/", error)
-                            response = issue.post(url, data, headers=headers)
-                            print(response)
-                            setStatusValue(fileName, 'failed',
-                                           indexFragment, indexTest)
-                            setCheckValue(
-                                fileName, 0, indexFragment, indexTest)
-                            setStatusNotesValue(fileName, response,
+                                setStatusNotesValue(fileName, "Executed",
                                                 indexFragment, indexTest)
 
                         except Exception as error:
-                            print("Error : " + error)
+                            print('---- ERROR----')
+                            data = {"title": getID(fileData), "body": error}
+                            try:
+                                createTestDocumentation(
+                                    testFilePath, "FAILED", testData, "IVDataSet/", error)
+                                response = issue.post(url, data, headers=headers)
+                                print(response)
+                                setStatusValue(fileName, 'failed',
+                                           indexFragment, indexTest)
+                                setCheckValue(
+                                    fileName, 0, indexFragment, indexTest)
+                                setStatusNotesValue(fileName, response,
+                                                indexFragment, indexTest)
 
-                elif (getTestType(testData) == 'ERROR_PROVOCATION'):
-                    try:
-                        testFileLink = "https://raw.githubusercontent.com/" + repoName + "/main/XDTesting/" + \
+                            except Exception as error:
+                                print("Error : " + error)
+
+                    elif (getTestType(testData) == 'ERROR_PROVOCATION'):
+                        try:
+                            testFileLink = "https://raw.githubusercontent.com/" + repoName + "/main/XDTesting/" + \
                                        fileData['fragments'][indexFragment]['ontologyName'].replace(
                                            " ", "") + "/" + fileData['fragments'][indexFragment]['name'].replace(" ",
                                                                                                                  "") + "/ErrorProvocationTest/"
 
-                        testFilePath = "./XDTesting/" + fileData['fragments'][indexFragment]['ontologyName'].replace(
-                            " ", "") + "/" + fileData['fragments'][indexFragment]['name'].replace(" ",
+                            testFilePath = "./XDTesting/" + fileData['fragments'][indexFragment]['ontologyName'].replace(
+                                " ", "") + "/" + fileData['fragments'][indexFragment]['name'].replace(" ",
                                                                                                   "") + "/TestDocumentation/"
-                        print(
-                            "Execution command: java -jar OWLUnit-0.3.2.jar --test-case " + testFileLink + "EPTestCase/" + getID(
+                            print(
+                                "Execution command: java -jar OWLUnit-0.3.2.jar --test-case " + testFileLink + "EPTestCase/" + getID(
                                 testData) + ".ttl")
 
-                        print('---- Executing Test ----')
-                        os.system(
-                            "java -jar OWLUnit-0.3.2.jar --test-case " + testFileLink + "EPTestCase/" + getID(
-                                testData) + ".ttl")  # fileData
-                        testOutcome = subprocess.check_output(
-                            "java -jar OWLUnit-0.3.2.jar --test-case " + testFileLink + "EPTestCase/" + getID(
+                            print('---- Executing Test ----')
+                            os.system(
+                                "java -jar OWLUnit-0.3.2.jar --test-case " + testFileLink + "EPTestCase/" + getID(
+                                    testData) + ".ttl")  # fileData
+                            testOutcome = subprocess.check_output(
+                                "java -jar OWLUnit-0.3.2.jar --test-case " + testFileLink + "EPTestCase/" + getID(
                                 testData) + ".ttl", shell=True)
 
-                        if "PASSED" in testOutcome.decode("utf-8"):
-                            print('---- PASSED ----')
-                            createTestDocumentation(
-                                testFilePath, "PASSED", testData, "EPDataSet/")
-                            setCheckValue(fileName, 1,
+                            if "PASSED" in testOutcome.decode("utf-8"):
+                                print('---- PASSED ----')
+                                createTestDocumentation(
+                                    testFilePath, "PASSED", testData, "EPDataSet/")
+                                setCheckValue(fileName, 1,
                                           indexFragment, indexTest)
-                            setStatusValue(fileName, 'success',
+                                setStatusValue(fileName, 'success',
                                            indexFragment, indexTest)
-                            setStatusNotesValue(fileName, "Executed",
+                                setStatusNotesValue(fileName, "Executed",
                                                 indexFragment, indexTest)
 
-                        elif "FAILED" in testOutcome.decode("utf-8"):
-                            print('---- FAILED----')
-                            createTestDocumentation(
-                                testFilePath, "FAILED", testData, "EPDataSet/")
-                            setStatusValue(fileName, 'failed',
+                            elif "FAILED" in testOutcome.decode("utf-8"):
+                                print('---- FAILED----')
+                                createTestDocumentation(
+                                    testFilePath, "FAILED", testData, "EPDataSet/")
+                                setStatusValue(fileName, 'failed',
                                            indexFragment, indexTest)
-                            setStatusNotesValue(fileName, "Executed",
+                                setStatusNotesValue(fileName, "Executed",
                                                 indexFragment, indexTest)
 
-                    except Exception as error:
-                        print('---- ERROR----')
-                        data = {"title": getID(fileData), "body": error}
-                        try:
-                            createTestDocumentation(
-                                testFilePath, "FAILED", testData, "EPDataSet/", error)
-                            response = issue.post(url, data, headers=headers)
-                            print(response)
-                            setStatusValue(fileName, 'failed',
-                                           indexFragment, indexTest)
-                            setCheckValue(
-                                fileName, 0, indexFragment, indexTest)
-                            setStatusNotesValue(fileName, response,
-                                                indexFragment, indexTest)
                         except Exception as error:
-                            print("Error : " + error)
-            else:
-                print('Test already Executed')
+                            print('---- ERROR----')
+                            data = {"title": getID(fileData), "body": error}
+                            try:
+                                createTestDocumentation(
+                                    testFilePath, "FAILED", testData, "EPDataSet/", error)
+                                response = issue.post(url, data, headers=headers)
+                                print(response)
+                                setStatusValue(fileName, 'failed',
+                                           indexFragment, indexTest)
+                                setCheckValue(
+                                    fileName, 0, indexFragment, indexTest)
+                                setStatusNotesValue(fileName, response,
+                                                indexFragment, indexTest)
+                            except Exception as error:
+                                print("Error : " + error)
+                else:
+                    print('Test already Executed')
 
 
 # ---------------- Start---------------#
