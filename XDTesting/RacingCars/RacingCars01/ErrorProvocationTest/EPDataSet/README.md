@@ -1,1 +1,0 @@
-This directory stores the sample data for the Error Provocation test cases.
