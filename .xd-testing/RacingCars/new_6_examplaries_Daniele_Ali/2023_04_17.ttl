@@ -1,0 +1,174 @@
+@prefix : <http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22/> .
+
+<http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#attributeType
+:attributeType rdf:type owl:ObjectProperty ;
+               rdfs:domain :CarComponentAttribute ;
+               rdfs:range :CarComponentAttributeType .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#designed
+:designed rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          owl:inverseOf :designedBy ;
+          rdfs:domain :Person ;
+          rdfs:range :CarComponent .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#designedBy
+:designedBy rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#hasMember
+:hasMember rdf:type owl:ObjectProperty ;
+           owl:inverseOf :isMemberOf .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#isMemberOf
+:isMemberOf rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty ;
+            rdfs:range :Collection .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#modelType
+:modelType rdf:type owl:ObjectProperty ;
+           rdfs:domain :CarModel ;
+           rdfs:range :CarModelType .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22/hasModel
+:hasModel rdf:type owl:ObjectProperty ;
+          rdfs:domain :Car ;
+          rdfs:range :CarModel .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#hasNExemplaries
+:hasNExemplaries rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :CarModel ;
+                 rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#intAttributeValue
+:intAttributeValue rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :CarComponentIntegerAttribute ;
+                   rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#isNthExemplary
+:isNthExemplary rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdfs:domain :Car ;
+                rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#realAttributeValue
+:realAttributeValue rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf owl:topDataProperty ;
+                    rdfs:domain :CarComponentRealAttribute ;
+                    rdfs:range owl:real .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#Car
+:Car rdf:type owl:Class ;
+     rdfs:subClassOf :Collection ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :hasMember ;
+                       owl:allValuesFrom :CarComponent
+                     ] ;
+     owl:disjointWith :CarModel ,
+                      :CarModelType .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#CarComponent
+:CarComponent rdf:type owl:Class ;
+              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                owl:onProperty :isMemberOf ;
+                                owl:allValuesFrom :Car
+                              ] ;
+              owl:disjointWith :CarComponentAttribute .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#CarComponentAttribute
+:CarComponentAttribute rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#CarComponentAttributeType
+:CarComponentAttributeType rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#CarComponentIntegerAttribute
+:CarComponentIntegerAttribute rdf:type owl:Class ;
+                              rdfs:subClassOf :CarComponentAttribute .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#CarComponentRealAttribute
+:CarComponentRealAttribute rdf:type owl:Class ;
+                           rdfs:subClassOf :CarComponentAttribute .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#CarModel
+:CarModel rdf:type owl:Class ;
+          owl:disjointWith :CarModelType .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#CarModelType
+:CarModelType rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#Collection
+:Collection rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#Person
+:Person rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#125s
+<http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#125s> rdf:type owl:NamedIndividual ,
+                                                                                        :CarModel ;
+                                                                               :hasNExemplaries 2 ;
+                                                                               rdfs:label "Ala Spessa"@it ,
+                                                                                          "Ferrari 125S"@en ,
+                                                                                          "Ferrari 125S"@it .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#125s_1
+<http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#125s_1> rdf:type owl:NamedIndividual ,
+                                                                                          :Car ;
+                                                                                 owl:differentFrom <http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#125s_2> ;
+                                                                                 :hasModel <http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#125s> ;
+                                                                                 :isNthExemplary 1 .
+
+
+###  http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#125s_2
+<http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#125s_2> rdf:type owl:NamedIndividual ,
+                                                                                          :Car ;
+                                                                                 :hasModel <http://www.semanticweb.org/danys/ontologies/2023/3/untitled-ontology-22#125s> ;
+                                                                                 :isNthExemplary 2 .
+
+
+###  Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi
