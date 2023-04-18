@@ -8,11 +8,6 @@
   ],
   "fragments": [
     {
-      "name": "6_examplaries_Daniele_Ali",
-      "ontologyName": "RacingCars",
-      "fileName": "RacingCars/6_examplaries_Daniele_Ali/6examplaries.OWL"
-    },
-    {
       "name": "RacingCarsManifacture",
       "ontologyName": "RacingCars",
       "fileName": "RacingCars/RacingCarsManifacture/ferrari.owl"
